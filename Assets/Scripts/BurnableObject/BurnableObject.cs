@@ -76,7 +76,7 @@ public class BurnableObject : MonoBehaviour
             case SimulationMode.Remove:
                 gameObject.SetActive(false);
                 break;
-            case SimulationMode.ToggleFire:
+            case SimulationMode.Toggle_Fire:
                 SetBurning();
                 break;
         }

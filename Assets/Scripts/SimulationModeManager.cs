@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public enum SimulationMode {
     Add = 1,
     Remove = 2,
-    ToggleFire = 3
+    Toggle_Fire = 3
 }
 
 public class SimulationModeManager : MonoBehaviour
 {
-    public SimulationMode mode = SimulationMode.ToggleFire;
+    public SimulationMode mode = SimulationMode.Toggle_Fire;
     [SerializeField]
     Button modeButton;
     void Start()
@@ -28,9 +28,9 @@ public class SimulationModeManager : MonoBehaviour
                 mode = SimulationMode.Remove;
                 break;
             case SimulationMode.Remove:
-                mode = SimulationMode.ToggleFire;
+                mode = SimulationMode.Toggle_Fire;
                 break;
-            case SimulationMode.ToggleFire:
+            case SimulationMode.Toggle_Fire:
                 mode = SimulationMode.Add;
                 break;
             default:
@@ -41,6 +41,6 @@ public class SimulationModeManager : MonoBehaviour
     }
     void SetButtonText()
     {
-        modeButton.GetComponentInChildren<Text>().text = mode.ToString();
+        modeButton.GetComponentInChildren<Text>().text = mode.ToString().Replace("_", " ");
     }
 }
