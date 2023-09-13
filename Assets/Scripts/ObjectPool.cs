@@ -5,9 +5,12 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool SharedInstance;
-    public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
+    public List<GameObject> burnableObjectsPool;
+    public List<GameObject> igniterPool;
+    public GameObject burnableObjectToPool;
+    public GameObject igniterToPool;
+    public int amountBurnableObjectToPool;
+    public int amountIgniterToPool;
 
     void Awake()
     {
@@ -16,30 +19,51 @@ public class ObjectPool : MonoBehaviour
 
     void Start()
     {
-        pooledObjects = new List<GameObject>();
-        for (int i = 0; i < amountToPool; i++)
+        burnableObjectsPool = new List<GameObject>();
+        for (int i = 0; i < amountBurnableObjectToPool; i++)
         {
-            PoolObject();
+            PoolBurnableObject();
         }
     }
-    public GameObject GetPooledObject()
+    public GameObject GetBurnableObjectPooled()
     {
-        for (int i = 0; i < amountToPool; i++)
+        for (int i = 0; i < amountBurnableObjectToPool; i++)
         {
-            if (!pooledObjects[i].activeInHierarchy)
+            if (!burnableObjectsPool[i].activeInHierarchy)
             {
-                return pooledObjects[i];
+                return burnableObjectsPool[i];
             }
         }
         // If nothing is found on the pool, more objects need to be pooled
-        return PoolObject();
+        return PoolBurnableObject();
     }
-    private GameObject PoolObject()
+    private GameObject PoolBurnableObject()
     {
 
-        GameObject tmp = Instantiate(objectToPool);
+        GameObject tmp = Instantiate(burnableObjectToPool);
         tmp.SetActive(false);
-        pooledObjects.Add(tmp);
+        burnableObjectsPool.Add(tmp);
+        return tmp;
+    }
+
+    public GameObject GetIgniterPooled()
+    {
+        for (int i = 0; i < amountIgniterToPool; i++)
+        {
+            if (!igniterPool[i].activeInHierarchy)
+            {
+                return igniterPool[i];
+            }
+        }
+        // If nothing is found on the pool, more objects need to be pooled
+        return PoolIgniter();
+    }
+    private GameObject PoolIgniter()
+    {
+
+        GameObject tmp = Instantiate(igniterToPool);
+        tmp.SetActive(false);
+        igniterPool.Add(tmp);
         return tmp;
     }
 }

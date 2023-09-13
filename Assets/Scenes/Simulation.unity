@@ -234,9 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfBurnableObjects: 10000
   numberOfIgniters: 0
-  igniter: {fileID: 8425550089172016867, guid: 786833d9066877b479a787a35461f46b, type: 3}
   pauseOverlay: {fileID: 342188488}
-  loadingOverlay: {fileID: 1962899473}
   numberOfBurnableObjectsInput: {fileID: 300132289}
   numberOfIgnitersInput: {fileID: 867308713}
 --- !u!4 &94108848
@@ -633,7 +631,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 20000
+  m_Text: 500
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -3284,7 +3282,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1430184031
 MonoBehaviour:
@@ -3992,7 +3990,7 @@ GameObject:
   - component: {fileID: 1886320973}
   - component: {fileID: 1886320972}
   m_Layer: 0
-  m_Name: ObjectPool
+  m_Name: Object Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4010,9 +4008,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2b234429558474899a6d6eaa9c51f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObjects: []
-  objectToPool: {fileID: 897273799430023501, guid: d89fbeb6520992945b78c443a58a062e, type: 3}
-  amountToPool: 50000
+  burnableObjectsPool: []
+  igniterPool: []
+  burnableObjectToPool: {fileID: 897273799430023501, guid: d89fbeb6520992945b78c443a58a062e, type: 3}
+  igniterToPool: {fileID: 8425550089172016867, guid: 786833d9066877b479a787a35461f46b, type: 3}
+  amountBurnableObjectToPool: 5000
+  amountIgniterToPool: 10000
 --- !u!4 &1886320973
 Transform:
   m_ObjectHideFlags: 0
@@ -4097,7 +4098,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20000
+  m_Text: 500
 --- !u!222 &1889209533
 CanvasRenderer:
   m_ObjectHideFlags: 0

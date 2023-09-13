@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int numberOfIgniters;
     [SerializeField]
-    GameObject igniter;
-    [SerializeField]
     GameObject pauseOverlay;
     [SerializeField]
     InputField numberOfBurnableObjectsInput;
@@ -39,14 +37,20 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnIgniter(Vector3 position)
     {
-        Instantiate(igniter, position, Quaternion.identity);
+        GameObject igniter = ObjectPool.SharedInstance.GetIgniterPooled();
+        if (igniter != null)
+        {
+            igniter.transform.position = position;
+            igniter.transform.rotation = Quaternion.identity;
+            igniter.SetActive(true);
+        }
     }
     public void SpawnBurnableObject()
     {
         ClearBurnableObjects();
         for (int i = 0; i < numberOfBurnableObjects; i++)
         {
-            GameObject burnableObject = ObjectPool.SharedInstance.GetPooledObject();
+            GameObject burnableObject = ObjectPool.SharedInstance.GetBurnableObjectPooled();
             if (burnableObject != null)
             {
                 burnableObject.transform.position = GenerateTerrainPosition(burnableObject.GetComponent<Renderer>().bounds.size.y / 2);
@@ -78,6 +82,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("BurnableObject"))
         {
+            BurnableObject burnableObject = gameObj.GetComponent<BurnableObject>();
+            burnableObject.SetNotBurning();
             gameObj.SetActive(false);
         }
     }

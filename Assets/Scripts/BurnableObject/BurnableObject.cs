@@ -67,6 +67,7 @@ public class BurnableObject : MonoBehaviour
             SetBurning();
         }
     }
+    /* Reacts to current simulation mode */
     private void OnMouseOver()
     {
         if (!Input.GetMouseButtonDown(0)) return;
@@ -74,6 +75,7 @@ public class BurnableObject : MonoBehaviour
         switch(mode)
         {
             case SimulationMode.Remove:
+                SetNotBurning();
                 gameObject.SetActive(false);
                 break;
             case SimulationMode.Toggle_Fire:
@@ -87,5 +89,4 @@ public class BurnableObject : MonoBehaviour
                 break;
         }
     }
-
 }

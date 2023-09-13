@@ -16,7 +16,7 @@ public class TerrainManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(gameObject.GetComponent<TerrainCollider>().Raycast(ray, out hit, Mathf.Infinity))
         {
-            GameObject burnableObject = ObjectPool.SharedInstance.GetPooledObject();
+            GameObject burnableObject = ObjectPool.SharedInstance.GetBurnableObjectPooled();
             float y = Terrain.activeTerrain.SampleHeight(new Vector3(hit.point.x, 0, hit.point.z)) + (burnableObject.GetComponent<Renderer>().bounds.size.y / 2);
             burnableObject.transform.position = new Vector3(hit.point.x, y, hit.point.z);
             burnableObject.transform.rotation = Quaternion.identity;
