@@ -17,12 +17,9 @@ public class ObjectPool : MonoBehaviour
     void Start()
     {
         pooledObjects = new List<GameObject>();
-        GameObject tmp;
         for (int i = 0; i < amountToPool; i++)
         {
-            tmp = Instantiate(objectToPool);
-            tmp.SetActive(false);
-            pooledObjects.Add(tmp);
+            PoolObject();
         }
     }
     public GameObject GetPooledObject()
@@ -34,6 +31,15 @@ public class ObjectPool : MonoBehaviour
                 return pooledObjects[i];
             }
         }
-        return null;
+        // If nothing is found on the pool, more objects need to be pooled
+        return PoolObject();
+    }
+    private GameObject PoolObject()
+    {
+
+        GameObject tmp = Instantiate(objectToPool);
+        tmp.SetActive(false);
+        pooledObjects.Add(tmp);
+        return tmp;
     }
 }

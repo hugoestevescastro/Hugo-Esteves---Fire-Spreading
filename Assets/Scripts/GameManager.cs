@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject pauseOverlay;
     [SerializeField]
-    GameObject loadingOverlay;
-    [SerializeField]
     InputField numberOfBurnableObjectsInput;
     [SerializeField]
     InputField numberOfIgnitersInput;
@@ -45,7 +43,6 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnBurnableObject()
     {
-        loadingOverlay.SetActive(true);
         ClearBurnableObjects();
         for (int i = 0; i < numberOfBurnableObjects; i++)
         {
@@ -57,7 +54,6 @@ public class GameManager : MonoBehaviour
                 burnableObject.SetActive(true);
             }
         }
-        loadingOverlay.SetActive(false);
     }
     Vector3 GenerateTerrainPosition(float yOffset)
     {

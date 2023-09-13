@@ -35,7 +35,7 @@ public class BurnableObject : MonoBehaviour
         if (state != BurnableObjectState.NotBurning) return;
         state = BurnableObjectState.Burning;
         objectRenderer.material.color = new Color(0.50f, 0.0f, 0.0f);
-        // trigger countdown for next state of burnt
+        // Trigger countdown for next state of burnt
         StartCoroutine("Burning");
     }
     /**
@@ -77,7 +77,13 @@ public class BurnableObject : MonoBehaviour
                 gameObject.SetActive(false);
                 break;
             case SimulationMode.Toggle_Fire:
-                SetBurning();
+                if (state == BurnableObjectState.Burning)
+                {
+                    SetBurnt();
+                } else
+                {
+                    SetBurning();
+                }
                 break;
         }
     }
