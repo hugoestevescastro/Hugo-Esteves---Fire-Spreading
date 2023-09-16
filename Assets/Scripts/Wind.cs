@@ -54,7 +54,6 @@ public class Wind : MonoBehaviour
     // When the igniter leaves the box, destroy it
     private void OnTriggerExit(Collider other)
     {
-
         if (other.CompareTag("Igniter"))
         {
             other.gameObject.SetActive(false);

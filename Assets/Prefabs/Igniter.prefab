@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1929220781810048765}
   - component: {fileID: 7429646009357046905}
   - component: {fileID: 2325280590156445685}
-  - component: {fileID: 3112912334932398972}
   m_Layer: 0
   m_Name: Igniter
   m_TagString: Igniter
@@ -113,16 +112,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3112912334932398972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8425550089172016867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73d1e5a69ddd87945b517502d5e5fffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToLive: 3
