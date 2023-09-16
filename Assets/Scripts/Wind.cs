@@ -13,8 +13,10 @@ public class Wind : MonoBehaviour
     public Slider windDirectionSlider;
     public Text windSpeedText;
     public Text windDirectionText;
+    GameObject windOrigin;
     private void Start()
     {
+        windOrigin = GameObject.Find("Wind Origin").gameObject;
         SetDirectionSliderValue();
     }
     public void SetSpeedSliderValue()
@@ -39,9 +41,7 @@ public class Wind : MonoBehaviour
     // Calculated wind direction using the center of the wind box and the wind origin as references
     private Vector3 CalculateWindDirection()
     {
-        Vector3 windBoxCenter = transform.position;
-        Vector3 windOrigin = GameObject.Find("Wind Origin").gameObject.transform.position;
-        return (windBoxCenter - windOrigin).normalized;
+        return (transform.position - windOrigin.transform.position).normalized;
     }
     // While the igniter is inside the wind box, move it
     void OnTriggerStay(Collider other)
