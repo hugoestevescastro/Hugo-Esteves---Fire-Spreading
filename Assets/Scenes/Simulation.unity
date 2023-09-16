@@ -4012,7 +4012,7 @@ MonoBehaviour:
   igniterPool: []
   burnableObjectToPool: {fileID: 897273799430023501, guid: d89fbeb6520992945b78c443a58a062e, type: 3}
   igniterToPool: {fileID: 8425550089172016867, guid: 786833d9066877b479a787a35461f46b, type: 3}
-  amountBurnableObjectToPool: 5000
+  amountBurnableObjectToPool: 30000
   amountIgniterToPool: 10000
 --- !u!4 &1886320973
 Transform:

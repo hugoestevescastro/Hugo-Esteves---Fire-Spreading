@@ -20,9 +20,14 @@ public class ObjectPool : MonoBehaviour
     void Start()
     {
         burnableObjectsPool = new List<GameObject>();
+        igniterPool = new List<GameObject>();
         for (int i = 0; i < amountBurnableObjectToPool; i++)
         {
             PoolBurnableObject();
+        }
+        for (int i = 0; i < amountIgniterToPool; i++)
+        {
+            PoolIgniter();
         }
     }
     public GameObject GetBurnableObjectPooled()

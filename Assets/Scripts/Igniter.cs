@@ -13,6 +13,6 @@ public class Igniter : MonoBehaviour
     IEnumerator TimeToLive()
     {
         yield return new WaitForSeconds(timeToLive);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

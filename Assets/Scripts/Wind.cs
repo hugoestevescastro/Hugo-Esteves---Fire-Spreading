@@ -57,7 +57,7 @@ public class Wind : MonoBehaviour
 
         if (other.CompareTag("Igniter"))
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 }
