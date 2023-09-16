@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject pauseOverlay;
     [SerializeField]
+    GameObject loadingOverlay;
+    [SerializeField]
+    GameObject menuBar;
+    [SerializeField]
     InputField numberOfBurnableObjectsInput;
     [SerializeField]
     InputField numberOfIgnitersInput;
@@ -50,17 +54,10 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnBurnableObject()
     {
+        loadingOverlay.SetActive(true);
+        menuBar.SetActive(false);
         ClearBurnableObjects();
-        for (int i = 0; i < numberOfBurnableObjects; i++)
-        {
-            GameObject burnableObject = ObjectPool.SharedInstance.GetBurnableObjectPooled();
-            if (burnableObject != null)
-            {
-                if (burnableObjectHeight == -1) burnableObjectHeight = burnableObject.GetComponent<Renderer>().bounds.size.y;
-                burnableObject.transform.position = GenerateTerrainPosition(burnableObjectHeight / 2);
-                burnableObject.SetActive(true);
-            }
-        }
+        StartCoroutine("SpawnBurnableObjectsCoroutine");
     }
     Vector3 GenerateTerrainPosition(float yOffset)
     {
@@ -100,5 +97,22 @@ public class GameManager : MonoBehaviour
     public void SetNumberOfIgniters()
     {
         numberOfIgniters = Convert.ToInt32(numberOfIgnitersInput.text);
+    }
+    // TODO: Loading screen only pops if the for loop is delayed, need to address this issue
+    IEnumerator SpawnBurnableObjectsCoroutine()
+    {
+        yield return new WaitForSeconds(0.001f);
+        for (int i = 0; i < numberOfBurnableObjects; i++)
+        {
+            GameObject burnableObject = ObjectPool.SharedInstance.GetBurnableObjectPooled();
+            if (burnableObject != null)
+            {
+                if (burnableObjectHeight == -1) burnableObjectHeight = burnableObject.GetComponent<Renderer>().bounds.size.y;
+                burnableObject.transform.position = GenerateTerrainPosition(burnableObjectHeight / 2);
+                burnableObject.SetActive(true);
+            }
+        }
+        loadingOverlay.SetActive(false);
+        menuBar.SetActive(true);
     }
 }

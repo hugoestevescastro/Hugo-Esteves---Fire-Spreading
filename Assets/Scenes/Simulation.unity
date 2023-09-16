@@ -235,6 +235,8 @@ MonoBehaviour:
   numberOfBurnableObjects: 10000
   numberOfIgniters: 0
   pauseOverlay: {fileID: 342188488}
+  loadingOverlay: {fileID: 1962899473}
+  menuBar: {fileID: 1185531777}
   numberOfBurnableObjectsInput: {fileID: 300132289}
   numberOfIgnitersInput: {fileID: 867308713}
 --- !u!4 &94108848
@@ -4162,7 +4164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 138, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1942024020
