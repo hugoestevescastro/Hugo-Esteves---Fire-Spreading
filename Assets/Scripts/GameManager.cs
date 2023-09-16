@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         GameObject igniter = ObjectPool.SharedInstance.GetIgniterPooled();
         if (igniter != null)
         {
-            //igniter.transform.SetPositionAndRotation(position, Quaternion.identity);
             igniter.transform.position = position;
             igniter.SetActive(true);
         }
@@ -58,7 +57,7 @@ public class GameManager : MonoBehaviour
             if (burnableObject != null)
             {
                 if (burnableObjectHeight == -1) burnableObjectHeight = burnableObject.GetComponent<Renderer>().bounds.size.y;
-                burnableObject.transform.position = GenerateTerrainPosition(burnableObjectHeight / 2); //SetPositionAndRotation(GenerateTerrainPosition(burnableObject.GetComponent<Renderer>().bounds.size.y / 2), Quaternion.identity);
+                burnableObject.transform.position = GenerateTerrainPosition(burnableObjectHeight / 2);
                 burnableObject.SetActive(true);
             }
         }

@@ -22,24 +22,8 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         Vector3 pos = transform.position;
-        // TODO update new inp system
-        if (Input.GetKey("w"))
-        {
-            pos.z += panSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey("s"))
-        {
-            pos.z -= panSpeed * Time.deltaTime;
-        }
-
-        if (Input.GetKey("a"))
-        {
-            pos.x -= panSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey("d"))
-        {
-            pos.x += panSpeed * Time.deltaTime;
-        }
+        pos.z += panSpeed * Time.deltaTime * Input.GetAxis("Vertical");
+        pos.x += panSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
         pos.y -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime;
 
         pos.x = Mathf.Clamp(pos.x, panXLimit.x, panXLimit.y);
