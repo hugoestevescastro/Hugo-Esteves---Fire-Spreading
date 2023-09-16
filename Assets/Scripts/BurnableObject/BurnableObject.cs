@@ -10,11 +10,13 @@ public class BurnableObject : MonoBehaviour
     Renderer objectRenderer;
     public float burningDuration = 5.0f;
     GameManager gameManager;
+    SimulationModeManager simulationModeManager;
     
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        simulationModeManager = gameManager.GetComponent<SimulationModeManager>();
         SetNotBurning();
     }
 
@@ -25,7 +27,7 @@ public class BurnableObject : MonoBehaviour
     {
         if (state == BurnableObjectState.Burnt) return;
         state = BurnableObjectState.NotBurning;
-        objectRenderer.material.color = new Color(0.13f, 0.54f, 0.13f);
+        objectRenderer.material.color = BurnableObjectColors.notBurning;
     }
     /**
      * Sets the status to burning, changes the color to red, and triggers countdown to next status which is Burnt
@@ -34,7 +36,7 @@ public class BurnableObject : MonoBehaviour
     {
         if (state != BurnableObjectState.NotBurning) return;
         state = BurnableObjectState.Burning;
-        objectRenderer.material.color = new Color(0.50f, 0.0f, 0.0f);
+        objectRenderer.material.color = BurnableObjectColors.burning;
         // Trigger countdown for next state of burnt
         StartCoroutine("Burning");
     }
@@ -45,7 +47,7 @@ public class BurnableObject : MonoBehaviour
     {
         if (state == BurnableObjectState.Burnt) return;
         state = BurnableObjectState.Burnt;
-        objectRenderer.material.color = new Color(0.0f, 0.0f, 0.0f);
+        objectRenderer.material.color = BurnableObjectColors.burnt;
     }
     /*
      * After the object starts burning, triggers countdown to be burn
@@ -71,7 +73,7 @@ public class BurnableObject : MonoBehaviour
     private void OnMouseOver()
     {
         if (!Input.GetMouseButtonDown(0)) return;
-        SimulationMode mode = gameManager.GetComponent<SimulationModeManager>().mode;
+        SimulationMode mode = simulationModeManager.mode;
         switch(mode)
         {
             case SimulationMode.Remove:

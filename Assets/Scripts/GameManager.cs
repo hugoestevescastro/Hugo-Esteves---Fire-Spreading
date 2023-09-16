@@ -17,8 +17,12 @@ public class GameManager : MonoBehaviour
     InputField numberOfBurnableObjectsInput;
     [SerializeField]
     InputField numberOfIgnitersInput;
+    float burnableObjectHeight;
+    Terrain terrain;
     private void Start()
     {
+        burnableObjectHeight = -1;
+        terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
         SetNumberOfBurnableObject();
         SetNumberOfIgniters();
     }
@@ -40,8 +44,8 @@ public class GameManager : MonoBehaviour
         GameObject igniter = ObjectPool.SharedInstance.GetIgniterPooled();
         if (igniter != null)
         {
+            //igniter.transform.SetPositionAndRotation(position, Quaternion.identity);
             igniter.transform.position = position;
-            igniter.transform.rotation = Quaternion.identity;
             igniter.SetActive(true);
         }
     }
@@ -53,16 +57,14 @@ public class GameManager : MonoBehaviour
             GameObject burnableObject = ObjectPool.SharedInstance.GetBurnableObjectPooled();
             if (burnableObject != null)
             {
-                burnableObject.transform.position = GenerateTerrainPosition(burnableObject.GetComponent<Renderer>().bounds.size.y / 2);
-                burnableObject.transform.rotation = Quaternion.identity;
+                if (burnableObjectHeight == -1) burnableObjectHeight = burnableObject.GetComponent<Renderer>().bounds.size.y;
+                burnableObject.transform.position = GenerateTerrainPosition(burnableObjectHeight / 2); //SetPositionAndRotation(GenerateTerrainPosition(burnableObject.GetComponent<Renderer>().bounds.size.y / 2), Quaternion.identity);
                 burnableObject.SetActive(true);
             }
         }
     }
     Vector3 GenerateTerrainPosition(float yOffset)
     {
-        Terrain terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
-
         //Get terrain size
         float width = terrain.terrainData.size.x;
         float length = terrain.terrainData.size.z;
@@ -74,7 +76,7 @@ public class GameManager : MonoBehaviour
         // Get random position
         float randX = UnityEngine.Random.Range(x, x + width);
         float randZ = UnityEngine.Random.Range(z, z + length);
-        float yVal = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ)) + yOffset;
+        float yVal = terrain.SampleHeight(new Vector3(randX, 0, randZ)) + yOffset;
 
         return new Vector3(randX, yVal, randZ);
     }

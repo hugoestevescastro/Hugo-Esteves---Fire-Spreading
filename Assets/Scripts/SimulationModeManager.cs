@@ -11,11 +11,12 @@ public enum SimulationMode {
 
 public class SimulationModeManager : MonoBehaviour
 {
-    public SimulationMode mode = SimulationMode.Toggle_Fire;
+    public SimulationMode mode;
     [SerializeField]
     Button modeButton;
     void Start()
     {
+        mode = SimulationMode.Toggle_Fire;
         SetButtonText();
     }
 

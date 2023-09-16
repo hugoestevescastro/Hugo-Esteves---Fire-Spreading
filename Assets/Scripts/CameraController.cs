@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
-    [SerializeField] private float distanceToTarget = 10;
+    [SerializeField] private float distanceToTarget = 200;
 
     private Vector3 previousPosition;
 

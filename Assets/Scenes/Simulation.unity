@@ -4460,7 +4460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
   target: {fileID: 1556024840}
-  distanceToTarget: 250
+  distanceToTarget: 200
 --- !u!1 &2059517504
 GameObject:
   m_ObjectHideFlags: 0
