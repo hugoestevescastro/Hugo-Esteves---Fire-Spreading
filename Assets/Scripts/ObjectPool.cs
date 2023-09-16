@@ -71,4 +71,12 @@ public class ObjectPool : MonoBehaviour
         igniterPool.Add(tmp);
         return tmp;
     }
+    public void ResetIgniters()
+    {
+        for (int i = 0; i < amountIgniterToPool;i++)
+        {
+            GameObject igniter = igniterPool[i];
+            igniter.SetActive(false);
+        }
+    }
 }

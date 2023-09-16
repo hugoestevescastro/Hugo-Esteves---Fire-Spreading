@@ -78,11 +78,11 @@ public class GameManager : MonoBehaviour
     }
     public void ClearBurnableObjects()
     {
-        foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("BurnableObject"))
+        GameObject[] bos = GameObject.FindGameObjectsWithTag("BurnableObject");
+        for (int i = 0; i < bos.Length; i++)
         {
-            BurnableObject burnableObject = gameObj.GetComponent<BurnableObject>();
-            burnableObject.SetNotBurning();
-            gameObj.SetActive(false);
+            BurnableObject burnableObject = bos[i].GetComponent<BurnableObject>();
+            burnableObject.ResetBurnableObject();
         }
     }
     public void ToggleSimulation()

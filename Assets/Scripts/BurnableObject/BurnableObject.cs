@@ -25,7 +25,6 @@ public class BurnableObject : MonoBehaviour
      */
     public void SetNotBurning()
     {
-        if (state == BurnableObjectState.Burnt) return;
         state = BurnableObjectState.NotBurning;
         objectRenderer.material.color = BurnableObjectColors.notBurning;
     }
@@ -34,7 +33,6 @@ public class BurnableObject : MonoBehaviour
      */
     public void SetBurning()
     {
-        if (state != BurnableObjectState.NotBurning) return;
         state = BurnableObjectState.Burning;
         objectRenderer.material.color = BurnableObjectColors.burning;
         // Trigger countdown for next state of burnt
@@ -45,7 +43,6 @@ public class BurnableObject : MonoBehaviour
      */
     public void SetBurnt()
     {
-        if (state == BurnableObjectState.Burnt) return;
         state = BurnableObjectState.Burnt;
         objectRenderer.material.color = BurnableObjectColors.burnt;
     }
@@ -90,5 +87,11 @@ public class BurnableObject : MonoBehaviour
                 }
                 break;
         }
+    }
+    public void ResetBurnableObject()
+    {
+        StopAllCoroutines();
+        SetNotBurning();
+        gameObject.SetActive(false);
     }
 }
