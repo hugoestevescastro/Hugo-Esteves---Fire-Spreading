@@ -1,38 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
-    [SerializeField] private Transform target;
-    [SerializeField] private float distanceToTarget = 200;
-
-    private Vector3 previousPosition;
-
+    [SerializeField]
+    float panSpeed = 100f;
+    [SerializeField]
+    float scrollSpeed = 1000f;
+    Vector2 panXLimit;
+    Vector2 panYLimit;
+    Vector2 panZLimit;
+    private void Start()
+    {
+        Terrain terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
+        float x = terrain.transform.position.x;
+        float y = terrain.terrainData.bounds.max.y;
+        float z = terrain.transform.position.z;
+        panXLimit = new Vector2(x, x + terrain.terrainData.size.x);
+        panYLimit = new Vector2(y, 150); // Max camera is 150 height, maps should not have more than, say 100
+        panZLimit = new Vector2(z, z + terrain.terrainData.size.z);
+    }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
+        Vector3 pos = transform.position;
+        // TODO update new inp system
+        if (Input.GetKey("w"))
         {
-            previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+            pos.z += panSpeed * Time.deltaTime;
         }
-        else if (Input.GetMouseButton(1) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetKey("s"))
         {
-            Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-            Vector3 direction = previousPosition - newPosition;
-
-            float rotationAroundYAxis = -direction.x * 180;
-            float rotationAroundXAxis = direction.y * 180;
-
-            cam.transform.position = target.position;
-
-            cam.transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis);
-            cam.transform.Rotate(new Vector3(0, 1, 0), rotationAroundYAxis, Space.World);
-
-            cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
-
-            previousPosition = newPosition;
+            pos.z -= panSpeed * Time.deltaTime;
         }
+
+        if (Input.GetKey("a"))
+        {
+            pos.x -= panSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey("d"))
+        {
+            pos.x += panSpeed * Time.deltaTime;
+        }
+        pos.y -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime;
+
+        pos.x = Mathf.Clamp(pos.x, panXLimit.x, panXLimit.y);
+        pos.y = Mathf.Clamp(pos.y, panYLimit.x, panYLimit.y);
+        pos.z = Mathf.Clamp(pos.z, panZLimit.x, panZLimit.y);
+
+        transform.position = pos;
     }
 }
