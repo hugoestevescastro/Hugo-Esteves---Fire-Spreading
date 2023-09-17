@@ -9,6 +9,7 @@ public class BurnableObject : MonoBehaviour
 {
     BurnableObjectState state = BurnableObjectState.NotBurning;
     Renderer objectRenderer;
+    Collider objectCollider;
     float burningMaxDuration = 10.0f;
     GameManager gameManager;
     SimulationModeManager simulationModeManager;
@@ -18,6 +19,7 @@ public class BurnableObject : MonoBehaviour
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
+        objectCollider = GetComponent<Collider>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         simulationModeManager = gameManager.GetComponent<SimulationModeManager>();
         SetNotBurning();
@@ -29,6 +31,7 @@ public class BurnableObject : MonoBehaviour
     public void SetNotBurning()
     {
         state = BurnableObjectState.NotBurning;
+        objectCollider.enabled = true;
         objectRenderer.material = materials[0];
     }
     /**
@@ -47,6 +50,7 @@ public class BurnableObject : MonoBehaviour
     public void SetBurnt()
     {
         state = BurnableObjectState.Burnt;
+        objectCollider.enabled = false;
         objectRenderer.material = materials[2];
     }
     /*
@@ -67,6 +71,7 @@ public class BurnableObject : MonoBehaviour
         if (other.CompareTag("Igniter") && state == BurnableObjectState.NotBurning)
         {
             SetBurning();
+            other.gameObject.SetActive(false);
         }
     }
     /* Reacts to current simulation mode */
