@@ -10,7 +10,7 @@ public class BurnableObject : MonoBehaviour
     BurnableObjectState state = BurnableObjectState.NotBurning;
     Renderer objectRenderer;
     Collider objectCollider;
-    float burningMaxDuration = 10.0f;
+    float burningMaxDuration = 20.0f;
     GameManager gameManager;
     SimulationModeManager simulationModeManager;
     [SerializeField]
@@ -58,7 +58,7 @@ public class BurnableObject : MonoBehaviour
      */
     IEnumerator Burning()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(0, burningMaxDuration));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(5, burningMaxDuration));
         // After it burned, spawn 3 igniters to make the fire spread as a cone
         gameManager.SpawnIgniter(gameObject.transform.position);
         gameManager.SpawnIgniter(new Vector3(gameObject.transform.position.x - 2, gameObject.transform.position.y - 2, gameObject.transform.position.z - 2));

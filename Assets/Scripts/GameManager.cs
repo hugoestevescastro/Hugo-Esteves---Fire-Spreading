@@ -112,4 +112,9 @@ public class GameManager : MonoBehaviour
         loadingOverlay.SetActive(false);
         menuBar.SetActive(true);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
