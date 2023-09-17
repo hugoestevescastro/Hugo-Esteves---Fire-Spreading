@@ -21,11 +21,9 @@ public class GameManager : MonoBehaviour
     InputField numberOfBurnableObjectsInput;
     [SerializeField]
     InputField numberOfIgnitersInput;
-    float burnableObjectHeight;
     Terrain terrain;
     private void Start()
     {
-        burnableObjectHeight = -1;
         terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
         SetNumberOfBurnableObject();
         SetNumberOfIgniters();
@@ -107,8 +105,7 @@ public class GameManager : MonoBehaviour
             GameObject burnableObject = ObjectPool.SharedInstance.GetBurnableObjectPooled();
             if (burnableObject != null)
             {
-                if (burnableObjectHeight == -1) burnableObjectHeight = burnableObject.GetComponent<Renderer>().bounds.size.y;
-                burnableObject.transform.position = GenerateTerrainPosition(burnableObjectHeight / 2);
+                burnableObject.transform.position = GenerateTerrainPosition(0);
                 burnableObject.SetActive(true);
             }
         }

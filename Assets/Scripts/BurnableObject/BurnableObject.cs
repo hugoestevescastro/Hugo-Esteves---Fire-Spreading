@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -11,6 +12,8 @@ public class BurnableObject : MonoBehaviour
     float burningMaxDuration = 10.0f;
     GameManager gameManager;
     SimulationModeManager simulationModeManager;
+    [SerializeField]
+    Material[] materials;
     
     private void Start()
     {
@@ -26,7 +29,7 @@ public class BurnableObject : MonoBehaviour
     public void SetNotBurning()
     {
         state = BurnableObjectState.NotBurning;
-        objectRenderer.material.color = BurnableObjectColors.notBurning;
+        objectRenderer.material = materials[0];
     }
     /**
      * Sets the status to burning, changes the color to red, and triggers countdown to next status which is Burnt
@@ -34,7 +37,7 @@ public class BurnableObject : MonoBehaviour
     public void SetBurning()
     {
         state = BurnableObjectState.Burning;
-        objectRenderer.material.color = BurnableObjectColors.burning;
+        objectRenderer.material = materials[1];
         // Trigger countdown for next state of burnt
         StartCoroutine("Burning");
     }
@@ -44,7 +47,7 @@ public class BurnableObject : MonoBehaviour
     public void SetBurnt()
     {
         state = BurnableObjectState.Burnt;
-        objectRenderer.material.color = BurnableObjectColors.burnt;
+        objectRenderer.material = materials[2];
     }
     /*
      * After the object starts burning, triggers countdown to be burn
