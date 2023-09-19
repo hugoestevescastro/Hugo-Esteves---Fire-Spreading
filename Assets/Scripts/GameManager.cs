@@ -22,11 +22,22 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     InputField numberOfIgnitersInput;
     Terrain terrain;
+    SimulationModeManager simulationModeManager;
     private void Start()
     {
         terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
-        SetNumberOfBurnableObject();
-        SetNumberOfIgniters();
+        simulationModeManager = GetComponent<SimulationModeManager>();
+        simulationModeManager.SetMode(SimulationMode.Automatic);
+        if (simulationModeManager.mode == SimulationMode.Automatic)
+        {
+            numberOfBurnableObjects = UnityEngine.Random.Range(0, numberOfBurnableObjects);
+            numberOfIgniters = UnityEngine.Random.Range(0, numberOfIgniters);
+            SpawnBurnableObject();
+        } else
+        {
+            SetNumberOfBurnableObject();
+            SetNumberOfIgniters();
+        }
     }
     public void IgniteRandomBurnableObject()
     {
@@ -90,11 +101,17 @@ public class GameManager : MonoBehaviour
     }
     public void SetNumberOfBurnableObject()
     {
-        numberOfBurnableObjects = Convert.ToInt32(numberOfBurnableObjectsInput.text);
+        if (numberOfBurnableObjectsInput)
+        {
+            numberOfBurnableObjects = Convert.ToInt32(numberOfBurnableObjectsInput.text);
+        }
     }
     public void SetNumberOfIgniters()
     {
-        numberOfIgniters = Convert.ToInt32(numberOfIgnitersInput.text);
+        if(numberOfIgnitersInput)
+        {
+            numberOfIgniters = Convert.ToInt32(numberOfIgnitersInput.text);
+        }
     }
     // TODO: Loading screen only pops if the for loop is delayed, need to address this issue
     IEnumerator SpawnBurnableObjectsCoroutine()
@@ -111,6 +128,15 @@ public class GameManager : MonoBehaviour
         }
         loadingOverlay.SetActive(false);
         menuBar.SetActive(true);
+        if(simulationModeManager.mode == SimulationMode.Automatic)
+        {
+            StartCoroutine("IgniteWithDelay");
+        }
+    }
+    IEnumerator IgniteWithDelay()
+    {
+        yield return new WaitForSeconds(3);
+        IgniteRandomBurnableObject();
     }
 
     public void Quit()

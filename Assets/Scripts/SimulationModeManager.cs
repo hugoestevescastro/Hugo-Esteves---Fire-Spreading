@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public enum SimulationMode {
     Add = 1,
     Remove = 2,
-    Toggle_Fire = 3
+    Toggle_Fire = 3,
+    Automatic = 4,
 }
 
 public class SimulationModeManager : MonoBehaviour
@@ -40,8 +41,15 @@ public class SimulationModeManager : MonoBehaviour
         }
         SetButtonText();
     }
+    public void SetMode(SimulationMode md)
+    {
+        mode = md;
+    }
     void SetButtonText()
     {
-        modeButton.GetComponentInChildren<Text>().text = mode.ToString().Replace("_", " ");
+       if (modeButton)
+        {
+            modeButton.GetComponentInChildren<Text>().text = mode.ToString().Replace("_", " ");
+        }
     }
 }

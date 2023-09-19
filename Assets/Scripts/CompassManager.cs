@@ -11,4 +11,8 @@ public class CompassManager : MonoBehaviour
     {
         Utilities.RotateObject(gameObject, new Vector3(0, 0, -windDirectionSlider.value));
     }
+    public void SetRotation(float rotation)
+    {
+        Utilities.RotateObject(gameObject, new Vector3(0, 0, -rotation));
+    }
 }
