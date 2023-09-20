@@ -41,7 +41,7 @@ public class ScoreManager : MonoBehaviour
         TriggerEndgame();
         return true;
     }
-    void TriggerEndgame()
+    public void TriggerEndgame()
     {
         // Pause everything
         Time.timeScale = 0;
