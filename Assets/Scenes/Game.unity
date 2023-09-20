@@ -2882,7 +2882,7 @@ MonoBehaviour:
   extinguisherPool: []
   burnableObjectToPool: {fileID: 897273799430023501, guid: d89fbeb6520992945b78c443a58a062e, type: 3}
   igniterToPool: {fileID: 8425550089172016867, guid: 786833d9066877b479a787a35461f46b, type: 3}
-  extinguisherToPool: {fileID: 2778941117852909983, guid: f19ec37889e3f0b44a1593aed55605f5, type: 3}
+  extinguisherToPool: {fileID: 1272471857415366792, guid: d0824fa7565be7547be04c87abd5e324, type: 3}
   amountBurnableObjectToPool: 30000
   amountIgniterToPool: 10000
   amountExtinguisherToPool: 500

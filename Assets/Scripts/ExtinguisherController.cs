@@ -7,9 +7,12 @@ public class ExtinguisherController : MonoBehaviour
     [SerializeField]
     float velocity = 20f;
     ExtinguisherManager extinguisherManager;
+    Animator extinguisherAnimator;
     private void Start()
     {
         extinguisherManager = GameObject.Find("Game Manager").GetComponent<ExtinguisherManager>();
+        extinguisherAnimator = GetComponent<Animator>();
+        extinguisherAnimator.SetFloat("RunningMultiplier", velocity / 20);
     }
     private void Update()
     {
