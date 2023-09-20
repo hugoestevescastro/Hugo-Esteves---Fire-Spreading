@@ -8,6 +8,8 @@ public class SpawnAreaController : MonoBehaviour
     ExtinguisherManager extinguisherManager;
     Terrain terrain;
     Camera cam;
+    [SerializeField]
+    Vector3 rotation;
     private void Start()
     {
         spawnAreaCollider = gameObject.GetComponent<Collider>();
@@ -25,6 +27,7 @@ public class SpawnAreaController : MonoBehaviour
             GameObject extinguisher = ObjectPool.SharedInstance.GetExtinguisherPooled();
             float y = terrain.SampleHeight(new Vector3(hit.point.x, 0, hit.point.z)) + (extinguisher.GetComponent<Renderer>().bounds.size.y / 2);
             extinguisher.transform.position = new Vector3(hit.point.x, y, hit.point.z);
+            Utilities.RotateObject(extinguisher.gameObject, rotation);
             extinguisher.SetActive(true);
             extinguisherManager.UpdateExtinguisherCounter(1);
         }

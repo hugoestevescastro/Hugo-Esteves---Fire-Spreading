@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumberOfExtinguishers: 20
-  activeNumberOfExtinguisher: 0
+  usedNumberOfExtinguisher: 0
   extinguishersTextInput: {fileID: 602786348}
 --- !u!1 &175154205
 GameObject:
@@ -875,6 +875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f38886abc396442aeadaf7017d9039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!1 &839563957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f38886abc396442aeadaf7017d9039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 90, z: 0}
 --- !u!1 &1067588268
 GameObject:
   m_ObjectHideFlags: 0
@@ -2600,6 +2602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f38886abc396442aeadaf7017d9039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 180, z: 0}
 --- !u!1 &1759001914
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,6 +2744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f38886abc396442aeadaf7017d9039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: -90, z: 0}
 --- !u!1 &1854048925
 GameObject:
   m_ObjectHideFlags: 0
