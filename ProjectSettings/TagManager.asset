@@ -7,6 +7,9 @@ TagManager:
   - Igniter
   - Terrain
   - BurnableObject
+  - Spawn Area
+  - Extinguisher
+  - Despawn Area
   layers:
   - Default
   - TransparentFX

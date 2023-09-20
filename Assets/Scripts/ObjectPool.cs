@@ -7,10 +7,13 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool SharedInstance;
     public List<GameObject> burnableObjectsPool;
     public List<GameObject> igniterPool;
+    public List<GameObject> extinguisherPool;
     public GameObject burnableObjectToPool;
     public GameObject igniterToPool;
+    public GameObject extinguisherToPool;
     public int amountBurnableObjectToPool;
     public int amountIgniterToPool;
+    public int amountExtinguisherToPool;
 
     void Awake()
     {
@@ -29,6 +32,10 @@ public class ObjectPool : MonoBehaviour
         {
             PoolIgniter();
         }
+        for (int i = 0; i < amountExtinguisherToPool; i++)
+        {
+            PoolExtinguisher();
+        }
     }
     public GameObject GetBurnableObjectPooled()
     {
@@ -41,6 +48,18 @@ public class ObjectPool : MonoBehaviour
         }
         // If nothing is found on the pool, more objects need to be pooled
         return PoolBurnableObject();
+    }
+    public GameObject GetExtinguisherPooled()
+    {
+        for (int i = 0; i < amountExtinguisherToPool; i++)
+        {
+            if (!extinguisherPool[i].activeInHierarchy)
+            {
+                return extinguisherPool[i];
+            }
+        }
+        // If nothing is found on the pool, more objects need to be pooled
+        return PoolExtinguisher();
     }
     private GameObject PoolBurnableObject()
     {
@@ -69,6 +88,14 @@ public class ObjectPool : MonoBehaviour
         GameObject tmp = Instantiate(igniterToPool);
         tmp.SetActive(false);
         igniterPool.Add(tmp);
+        return tmp;
+    }
+    private GameObject PoolExtinguisher()
+    {
+
+        GameObject tmp = Instantiate(extinguisherToPool);
+        tmp.SetActive(false);
+        extinguisherPool.Add(tmp);
         return tmp;
     }
     public void ResetIgniters()
