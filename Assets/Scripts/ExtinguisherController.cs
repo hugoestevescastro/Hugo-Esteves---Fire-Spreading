@@ -6,6 +6,11 @@ public class ExtinguisherController : MonoBehaviour
 {
     [SerializeField]
     float velocity = 20f;
+    ExtinguisherManager extinguisherManager;
+    private void Start()
+    {
+        extinguisherManager = GameObject.Find("Game Manager").GetComponent<ExtinguisherManager>();
+    }
     private void Update()
     {
         transform.position += transform.forward * velocity * Time.deltaTime;
