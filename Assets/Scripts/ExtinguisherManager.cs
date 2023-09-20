@@ -11,6 +11,7 @@ public class ExtinguisherManager : MonoBehaviour
     Text extinguishersTextInput;
     void Start()
     {
+        maxNumberOfExtinguishers = UnityEngine.Random.Range(1, maxNumberOfExtinguishers);
         UpdateExtinguisherCounter(0);
     }
 

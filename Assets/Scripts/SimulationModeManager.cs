@@ -17,7 +17,6 @@ public class SimulationModeManager : MonoBehaviour
     Button modeButton;
     void Start()
     {
-        mode = SimulationMode.Toggle_Fire;
         SetButtonText();
     }
 

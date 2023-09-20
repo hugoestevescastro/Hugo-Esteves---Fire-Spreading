@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 public class BurnableObject : MonoBehaviour
 {
-    BurnableObjectState state = BurnableObjectState.NotBurning;
+    public BurnableObjectState state = BurnableObjectState.NotBurning;
     Renderer objectRenderer;
     Collider objectCollider;
     float burningMaxDuration = 20.0f;

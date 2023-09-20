@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
@@ -21,17 +22,18 @@ public class GameManager : MonoBehaviour
     InputField numberOfBurnableObjectsInput;
     [SerializeField]
     InputField numberOfIgnitersInput;
+    [SerializeField]
+    ScoreManager scoreManager;
     Terrain terrain;
     SimulationModeManager simulationModeManager;
     private void Start()
     {
         terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
         simulationModeManager = GetComponent<SimulationModeManager>();
-        simulationModeManager.SetMode(SimulationMode.Automatic);
         if (simulationModeManager.mode == SimulationMode.Automatic)
         {
-            numberOfBurnableObjects = UnityEngine.Random.Range(0, numberOfBurnableObjects);
-            numberOfIgniters = UnityEngine.Random.Range(0, numberOfIgniters);
+            numberOfBurnableObjects = UnityEngine.Random.Range(1, numberOfBurnableObjects);
+            numberOfIgniters = UnityEngine.Random.Range(1, numberOfIgniters);
             SpawnBurnableObject();
         } else
         {
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject burnableObject = burnableObjects[UnityEngine.Random.Range(0, burnableObjects.Length)];
                 burnableObject.GetComponent<BurnableObject>().SetBurning();
+                if (scoreManager && i == 0) scoreManager.isGameStarted = true;
             }
         }
     }
@@ -142,5 +145,10 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
 }

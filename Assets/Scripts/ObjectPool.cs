@@ -39,7 +39,7 @@ public class ObjectPool : MonoBehaviour
     }
     public GameObject GetBurnableObjectPooled()
     {
-        for (int i = 0; i < amountBurnableObjectToPool; i++)
+        for (int i = 0; i < burnableObjectsPool.Count; i++)
         {
             if (!burnableObjectsPool[i].activeInHierarchy)
             {
@@ -51,7 +51,7 @@ public class ObjectPool : MonoBehaviour
     }
     public GameObject GetExtinguisherPooled()
     {
-        for (int i = 0; i < amountExtinguisherToPool; i++)
+        for (int i = 0; i < extinguisherPool.Count; i++)
         {
             if (!extinguisherPool[i].activeInHierarchy)
             {
@@ -72,7 +72,7 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetIgniterPooled()
     {
-        for (int i = 0; i < amountIgniterToPool; i++)
+        for (int i = 0; i < igniterPool.Count; i++)
         {
             if (!igniterPool[i].activeInHierarchy)
             {
@@ -105,5 +105,10 @@ public class ObjectPool : MonoBehaviour
             GameObject igniter = igniterPool[i];
             igniter.SetActive(false);
         }
+    }
+
+    public List<GameObject> GetActiveBurnableObject()
+    {
+        return burnableObjectsPool.FindAll(bo => bo.activeInHierarchy);
     }
 }
